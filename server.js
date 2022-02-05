@@ -12,12 +12,12 @@ app.use(express.static('public'));
 
 // setup a 'route' to listen on the default url path (http://localhost)
 app.get("/", function(req,res){
-    res.redirect('/about');
+    res.redirect("/about");
 });
 
 // setup another route to listen on /about
 app.get("/about", function(req,res){
-    res.send("<h3>About</h3>");
+    res.send('views/about.html');
 });
 
 // setup http server to listen on HTTP_PORT
