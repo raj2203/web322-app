@@ -34,20 +34,22 @@ module.exports.getPublishedPosts = function(){
     return new Promise((resolve,reject)=>{
         var post =[];
         for(let i=0;i<posts.length;i++){
-            if(posts[i].isPost){
+            if(posts[i].published){
                 post.push(posts[i]);
             }
         }
-        if(post.length==0) reject("No Public Post Found");
-
+        if(post.length==0)
+        {
+             reject("No Public Post Found");
+        }
         resolve(post);
     })
 }
 module.exports.getCategories = function(){
     return new Promise((resolve,reject)=>{
-        if(category.length==0){
+        if(categories.length==1){
             reject("No Catagories Found")
         }
-        resolve(category);
+        resolve(categories);
     })
 }
