@@ -12,9 +12,10 @@ source
 * git: https://github.com/raj2203/web322-app
 ************************************************************************
 ********/ 
-const multer = require("multer")
-const cloudinary = require('cloudinary').v2
-const streamifier = require('streamifier')
+const multer = require("multer");
+const cloudinary = require('cloudinary').v2;
+const streamifier = require('streamifier');
+const upload = multer({ storage: storage });
 var data = require('./blog-service.js');
 var path = require("path");
 var express = require('express');
@@ -74,6 +75,31 @@ app.use((req,res)=>{
   res.status(404).sendFile(path.join(__dirname,"/views/404.html"));
 });
 
+app.post("/posts/add", fileUpload.single('image'), function (req, res, next) {
+  let streamUpload = (req) => {
+    return new Promise((resolve, reject) => {
+    let stream = cloudinary.uploader.upload_stream(
+    (error, result) => {
+    if (result) {
+    resolve(result)
+    } else {
+    reject(error)
+    }}
+    );
+    streamifier.createReadStream(req.file.buffer).pipe(stream);
+    });
+   };
+   async function upload(req) {
+    let result = await streamUpload(req);
+    console.log(result)
+    return result
+   }
+   upload(req).then((uploaded) => {
+    req.body.featureImage = uploaded.url
+    // TODO: Process the req.body and add it as a new Blog Post before redirecting to
+   /posts
+   });
+  });
 
 data.initialize().then(function(){ //before I run my server I initialize the data
   app.listen(HTTP_PORT, onHttpStart);

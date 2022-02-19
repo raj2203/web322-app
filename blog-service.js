@@ -53,3 +53,15 @@ module.exports.getCategories = function(){
         resolve(categories);
     })
 }
+
+module.exports.addPost = function(postData){
+    if(!postData.id) employeeData.id=false;
+    else postData.id = true;
+    postData.postNum = posts.length+1;
+    posts.push(postData);
+    return new Promise((resolve, reject) => {
+        resolve(posts);
+        if(posts.length == 0)
+        reject("no results returned");
+    });
+};
