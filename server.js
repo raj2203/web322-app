@@ -12,10 +12,7 @@ source
 * git: https://github.com/raj2203/web322-app
 ************************************************************************
 ********/ 
-const multer = require("multer");
-const cloudinary = require('cloudinary').v2;
-const streamifier = require('streamifier');
-const upload = multer({ storage: storage });
+
 var data = require('./blog-service.js');
 var path = require("path");
 var express = require('express');
