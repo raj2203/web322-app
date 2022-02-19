@@ -9,6 +9,7 @@ source
 * Name: Raj Patel, Student ID: 159772201, Date: 04/02/2022
 *
 * Online (Heroku) URL: https://damp-dusk-58507.herokuapp.com/
+* git: https://github.com/raj2203/web322-app
 ************************************************************************
 ********/ 
 var data = require('./blog-service.js');
@@ -32,6 +33,12 @@ app.get("/", function(req,res){
 app.get("/about", function(req,res){
     res.sendFile(path.join(__dirname,"/views/about.html"));
 });
+
+//setup another route to listen in /about
+app.get("/posts/add", function(req,res){
+  res.sendFile(path.join(__dirname,"/views/addPost.html"));
+});
+
 //setup a route to listen in /blogs
 app.get("/blogs", function(req,res){
   data.getPublishedPosts()
