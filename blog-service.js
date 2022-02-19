@@ -65,3 +65,30 @@ module.exports.addPost = function(postData){
         reject("no results returned");
     });
 };
+
+exports.getPostsByCategory = function(category){
+    return new Promise((resolve, reject) => {
+        let filteredPosts = posts.filter(posts => posts.category == category);
+        resolve(filteredPosts);
+        if(filteredPosts.length == 0)
+        reject("no results returned");
+    });
+}
+
+exports.getPostsByMinDate = function(minDateStr){
+    return new Promise((resolve, reject) => {
+        let filteredPosts = posts.filter(posts => posts.postDate == minDateStr);
+        resolve(filteredPosts);
+        if(filteredPosts.length == 0)
+        reject("no results returned");
+    });
+}
+
+exports.getPostById = function(id){
+    return new Promise((resolve, reject) => {
+        let filteredPosts = posts.filter(posts => posts.id == id);
+        resolve(filteredPosts);
+        if(filteredPosts.length == 0)
+        reject("no results returned");
+    });
+}

@@ -61,6 +61,29 @@ app.get("/posts", function(req,res){
       res.json("{message: "+err+'}');
   })
 });
+
+app.get('/posts', (req, res) => {
+  if(req.query.category) {
+      dataService.getPostsByCategory(req.query.category)
+          .then((data) => res.json(data))
+          .catch((err) => res.json({"message": err}))
+  }else if(req.query.minDateStr){
+      dataService.getPostsByMinDate(req.query.minDateStr)
+          .then((data) => res.json(data))
+          .catch((err) => res.json({"message": err}))
+  }else if(req.query.id){
+      dataService.getPostById(req.query.id)
+          .then((data) => res.json(data))
+          .catch((err) => res.json({"message": err}))
+  }else{
+      dataService.getAllPosts()
+          .then((data) => res.json(data))
+          .catch((err) => res.json({"message": err}))
+  }
+});
+
+
+
 //setup a route to listen in /categories
 app.get("/categories", function(req,res){
   data.getCategories()
