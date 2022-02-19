@@ -1,18 +1,21 @@
 /**********************************************************************
-* WEB322 – Assignment 2
+* WEB322 – Assignment 3
 * I declare that this assignment is my own work in accordance with Seneca Academic
 Policy.
 * No part of this assignment has been copied manually or electronically from any other
 source
 * (including web sites) or distributed to other students.
 * 
-* Name: Raj Patel, Student ID: 159772201, Date: 04/02/2022
+* Name: Raj Patel, Student ID: 159772201, Date: 18/02/2022
 *
 * Online (Heroku) URL: https://damp-dusk-58507.herokuapp.com/
-* git: https://github.com/raj2203/web322-app
+
 ************************************************************************
 ********/ 
-
+const multer = require("multer");
+const cloudinary = require('cloudinary').v2;
+const streamifier = require('streamifier');
+const upload = multer({ storage: storage });
 var data = require('./blog-service.js');
 var path = require("path");
 var express = require('express');
